@@ -1,0 +1,73 @@
+{
+  "rules_version": "2",
+  "functions": [
+    {
+      "name": "processWithdrawal",
+      "runtime": "nodejs_20",
+      "description": "Process withdrawal requests and transfer diamonds to fiat",
+      "trigger": "firestore",
+      "path": "functions/withdrawal/processWithdrawal"
+    },
+    {
+      "name": "sendGift",
+      "runtime": "nodejs_20",
+      "description": "Handle gift sending and coin/diamond transfers",
+      "trigger": "firestore",
+      "path": "functions/gifts/sendGift"
+    },
+    {
+      "name": "createUser",
+      "runtime": "nodejs_20",
+      "description": "Create user document on auth signup",
+      "trigger": "auth",
+      "path": "functions/users/createUser"
+    },
+    {
+      "name": "updateUserBalance",
+      "runtime": "nodejs_20",
+      "description": "Update user wallet balance for transactions",
+      "trigger": "firestore",
+      "path": "functions/wallet/updateUserBalance"
+    },
+    {
+      "name": "roomNotification",
+      "runtime": "nodejs_20",
+      "description": "Send room updates to users",
+      "trigger": "firestore",
+      "path": "functions/rooms/roomNotification"
+    }
+  ],
+  "indexes": [
+    {
+      "collection": "users",
+      "fields": [
+        { "field": "role", "order": "ASCENDING" },
+        { "field": "status", "order": "ASCENDING" },
+        { "field": "createdAt", "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collection": "party_rooms",
+      "fields": [
+        { "field": "status", "order": "ASCENDING" },
+        { "field": "onlineCount", "order": "DESCENDING" },
+        { "field": "createdAt", "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collection": "withdrawals",
+      "fields": [
+        { "field": "status", "order": "ASCENDING" },
+        { "field": "userId", "order": "ASCENDING" },
+        { "field": "requestedAt", "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collection": "users",
+      "fields": [
+        { "field": "diamondsBalance", "order": "DESCENDING" },
+        { "field": "createdAt", "order": "DESCENDING" }
+      ]
+    }
+  ]
+}
